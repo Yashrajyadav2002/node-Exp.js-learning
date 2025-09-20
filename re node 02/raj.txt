@@ -1,0 +1,1 @@
+thuis is the raj txt file , i can read the flle by the node.js funcation with the help of fs module .
