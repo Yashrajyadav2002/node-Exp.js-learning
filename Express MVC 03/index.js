@@ -7,6 +7,6 @@ app.set("view engine","ejs");
 app.use("/student", studentRoute);
 
 
-app.listen(8000,()=>{
-    console.log("server is running port on 8000")
+app.listen(7000,()=>{
+    console.log("server is running port on 7000")
 })
