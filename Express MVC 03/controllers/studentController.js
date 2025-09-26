@@ -1,3 +1,5 @@
+
+const stuModel = require("../models/studentModels");
 const homepage=(req,res)=>{
     res.render("home");
 }
