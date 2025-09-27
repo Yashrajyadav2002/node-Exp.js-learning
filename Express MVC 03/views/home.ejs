@@ -6,12 +6,23 @@
     <title>Document</title>
 </head>
 <body bgcolor="blue">
-
-    <h1>Welcome to home page</h1>
-
     
+    <a href="/student/home">Home</a>
+    <a href="/student/about">About</a>
+    <a href="/student/contact">Contact</a>
+    <a href="/student/service">Service</a>
+    <a href="/student/salary">Salary</a>
 
-    
-    
+    <h1>Welcome to home page with views </h1>
+
+    <form action="/student/datasave"method="POST">
+        Rollno. <input type="number" name="rollno"> <br><br>
+        Name <input type="text" name="name"> <br> <br>
+        City <input type="text" name="city"> <br> <br>
+        Fees <input type="number" name="fees"> <br> <br>
+
+        <button type="submit"> submit</button>
+    </form>
+
 </body>
 </html>
