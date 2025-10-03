@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body bgcolor="pink">
+
+    <h1>Welcome to student managment System </h1>
+         <a href="/">Home</a>
+        <a href="/insert">insert</a>
+        <a href="/display">Display</a>
+        <a href="/search">Search</a>
+        <a href="/update">Update</a>
+        <a href="/contact">Contact</a>
+        <hr>
+
+        <h2> Update page</h2>
+
+        <table width="600" align="center" bgcolor="yellow">
+            <tr bgcolor="orange">
+                <th>Rollno</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Fees</th>
+            </tr>
+            <%
+            Stu.forEach((key)=>{%>
+                <tr>
+                    <td><%= Key.rollno %></td>
+                    <td><%= Key.name %></td>
+                    <td><%= Key.city %></td>
+                    <td><%= Key.fees %></td>
+                    <td>
+                        <a href="/dataedit?id=<%= key._id %">Edit</a>
+                        <a href="/datadelete?id=<%= key._id %>">Delete</a>
+                    </td>
+                </tr>
+
+            })
+            %>
+        </table>
+    
+
+
+    
+    
+</body>
+</html>

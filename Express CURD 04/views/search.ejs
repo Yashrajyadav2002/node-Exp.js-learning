@@ -1,0 +1,47 @@
+            
+
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body bgcolor="pink">
+
+    <h1>Welcome to student managment System </h1>
+         <a href="/">Home</a>
+        <a href="/insert">insert</a>
+        <a href="/display">Display</a>
+        <a href="/search">Search</a>
+        <a href="/update">Update</a>
+        <a href="/contact">Contact</a>
+        <hr>
+
+        <h2>student search page</h2>
+        <hr>
+        <form method="post" action="/search">
+        Enter Rollno : <input type="text" name="rno">
+        <button>search</button>
+        </form>
+        <hr>
+
+        <table>
+            <tr>
+                <th>Roll no</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>fees</th>
+            </tr>
+            <%
+            stu.forEach((key)=>{%>
+            <tr>
+                <td><%= key.rollno %></td>
+                <td><%= key.name %></td>
+                <td><%= key.city %></td>
+                <td><%= key.fees %></td>
+            </tr>
+            
+        })
+        %>0000
+        </table>
