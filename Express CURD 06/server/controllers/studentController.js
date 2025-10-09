@@ -15,6 +15,15 @@ const dataDisplay=async (req,res)=>{
 }
 
 
+const datasearch =async(req,res)=>{
+    const {rno}=req.body;
+    const student =await studentModel.find({rollno:rno});
+    console.log(student);
+    res.send(student);
+
+}
+
 module.exports={createStudent,
-    dataDisplay
+    dataDisplay,
+    datasearch 
 };
