@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 const Insert = () => {
   const [frmData,setFrmData]=useState({});
-
   const handleInput=(e)=>{
-
       setFrmData((prev)=>({...prev,[e.target.name]:e.target.value}));
   }
   const handleSubmit=async(e)=>{

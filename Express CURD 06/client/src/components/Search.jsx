@@ -33,11 +33,13 @@ const Search = ()=>{
         onChange={(e)=>{setrno(e.target.value)}}/>
         <button onClick={handleSubmit}>Search</button>
         <hr />
+        <hr />
+        <hr />
 
-        <table>
-            <tr>
+        <table border="1" width="800" align="center" >
+            <tr bgcolor="lightgreen">
                 <th>Rollno</th>
-                <th>Nmae</th>
+                <th>Name</th>
                 <th>City</th>
                 <th>Fees</th>
             </tr>

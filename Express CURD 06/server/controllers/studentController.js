@@ -23,7 +23,20 @@ const datasearch =async(req,res)=>{
 
 }
 
+const updateDisplay = async(req,res)=>{
+    const Student = await studentModel.find();
+    res.send(Student);
+}
+
+const updateDelete = async(req,res)=>{
+    const {id}= req.query;
+    const Student  = await studentModel.findByIdAndDelete(id);
+    res.send({msg:"Data sucessfully Deleted !!"})
+}
+
 module.exports={createStudent,
     dataDisplay,
-    datasearch 
+    datasearch ,
+    updateDisplay,
+    updateDelete
 };

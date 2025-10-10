@@ -16,7 +16,7 @@ const App = () => {
           <Route path="insert" element={<Insert />} />
           <Route path="display" element={<Display />} />
           <Route path="update" element={<Update />} />
-          <Route path="search" element={<Search />} />
+          <Route path="search " element={<Search />} />
         </Route>
       </Routes>
     </div>
