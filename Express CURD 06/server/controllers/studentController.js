@@ -1,25 +1,25 @@
 const studentModel = require("../models/studentModel");
-const Student = require("../models/studentModel");
 
-
-const createStudent=async(req,res)=>{
-    const {rollno,name,city,fees}=req.body;
-    const stu= await Student.create({rollno,name,city,fees});
-    res.send ("data is save");
-    
-}
-
+const dataSave = async (req,res)=>{
+    const{rno,nm,ct,fs}= req.body;
+    const Student = await studentModel.create({
+        rollno:rno,
+        name:nm,
+        city:ct,
+        fees:fs
+    })
+    res.send("Data save Sucessfully")
+};
 const dataDisplay=async (req,res)=>{
     const myData = await studentModel.find();
     res.send(myData);
 }
 
-
 const datasearch =async(req,res)=>{
     const {rno}=req.body;
-    const student =await studentModel.find({rollno:rno});
-    console.log(student);
-    res.send(student);
+    const Student =await studentModel.find({rollno:rno});
+    console.log(Student);
+    res.send(Student);
 
 }
 
@@ -34,9 +34,30 @@ const updateDelete = async(req,res)=>{
     res.send({msg:"Data sucessfully Deleted !!"})
 }
 
-module.exports={createStudent,
+const editDisplay = async(req,res)=>{
+    const {id}= req.params;
+    const student  =await studentModel.findById(id);
+    console.log(student);
+    res.send(student);
+}
+
+const editdataSave = async (req,res)=>{
+    const {_id,rollno,name,city,fees} = req.body;
+    const student  =await studentModel.findByIdAndUpdate(_id,{
+        rollno:rollno,
+        name:name,
+        city:city,
+        fees:fees
+    });
+    req.send({msg:"Data succesfullu Updated .."})
+}
+
+module.exports={
     dataDisplay,
     datasearch ,
     updateDisplay,
-    updateDelete
+    updateDelete,
+    editDisplay,
+    editdataSave,
+    dataSave
 };

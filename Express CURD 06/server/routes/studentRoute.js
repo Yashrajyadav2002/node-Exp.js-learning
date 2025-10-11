@@ -1,13 +1,16 @@
 const express=require("express");
-const stucontroller = require("../controllers/StudentController");
-const router=express.Router();
+const stucontroller = require("../controllers/studentController");
+const route=express.Router(); 
 
-router.post("/create",stucontroller.createStudent);
-router.get("/display",stucontroller.dataDisplay);
-router.post("/search",stucontroller.datasearch);
-router.get("/updatedata",stucontroller.updateDisplay);
-router.delete("/updatedelete",stucontroller.updateDelete);
+// route.post("/create",stucontroller.createStudent);
+route.post("/save",stucontroller.dataSave);
+route.get("/display",stucontroller.dataDisplay);
+route.post("/search",stucontroller.datasearch);
+route.get("/updatedata",stucontroller.updateDisplay);
+route.delete("/updatedelete",stucontroller.updateDelete);
+route.get("/editdisplay/:id",stucontroller.editDisplay);
+route.post("/editdatasave",stucontroller.edit);
 
 
 
-module.exports=router;
+module.exports=route;
