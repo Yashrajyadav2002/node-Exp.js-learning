@@ -49,7 +49,7 @@ const editdataSave = async (req,res)=>{
         city:city,
         fees:fees
     });
-    req.send({msg:"Data succesfullu Updated .."})
+    res.send({msg:"Data succesfully Updated .."})
 }
 
 module.exports={

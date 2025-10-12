@@ -9,7 +9,7 @@ route.post("/search",stucontroller.datasearch);
 route.get("/updatedata",stucontroller.updateDisplay);
 route.delete("/updatedelete",stucontroller.updateDelete);
 route.get("/editdisplay/:id",stucontroller.editDisplay);
-route.post("/editdatasave",stucontroller.edit);
+route.post("/editdatasave",stucontroller.editdataSave);
 
 
 
