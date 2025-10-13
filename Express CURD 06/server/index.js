@@ -9,7 +9,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/student",stuRoute);
-mongoose.connect("mongodb://127.0.0.1:27017/cybromnode").then(() => console.log("connected to db"));
+mongoose.connect("mongodb+srv://yyash9631_db_user:r2aNVJ217CJS5Biv@cluster0.wrnngf5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0").then(() => console.log("connected to db"));
 
 
 
