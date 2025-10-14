@@ -1,15 +1,29 @@
 const studentModel = require("../models/studentModel");
 
-const dataSave = async (req,res)=>{
-    const{rno,nm,ct,fs}= req.body;
-    const Student = await studentModel.create({
-        rollno:rno,
-        name:nm,
-        city:ct,
-        fees:fs
-    })
-    res.send("Data save Sucessfully")
+// const dataSave = async (req,res)=>{
+//     console.log(req.body);
+//     const{rollno,name,city,fees}= req.body;
+//     const Student = await studentModel.create({
+//         rollno:rollno,
+//         name:name,
+//         city:city,
+//         fees:fees
+//     })
+//     console.log(Student);
+//     res.send("Data save Sucessfully",Student)
+// };
+
+
+const dataSave = async (req, res) => {
+  try {
+    const { rollno, name, city, fees } = req.body;
+    const student = await studentModel.create({ rollno, name, city, fees });
+    res.status(201).json({ msg: "Data saved successfully", student });
+  } catch (error) {
+    res.status(500).json({ msg: "Error saving data", error });
+  }
 };
+
 const dataDisplay=async (req,res)=>{
     const myData = await studentModel.find();
     res.send(myData);

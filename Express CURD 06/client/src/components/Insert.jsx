@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 const Insert = () => {
-  const [frmData,setFrmData]=useState({});
-  const handleInput=(e)=>{
-      setFrmData((prev)=>({...prev,[e.target.name]:e.target.value}));
-  }
-  const handleSubmit=async(e)=>{
-    e.preventDefault();
-    const res=await axios.post("http://localhost:3001/student/create",frmData);
-    alert(res.data);
-  }
+    const [val,setval]=useState({});
+
+    const handleInput = (e)=>{
+       let name = e.target.name;
+       let val1 = e.target.value;
+       setval(values=>({...values,[name] : val1}))
+    }
+
+    const subData = async(e)=>{
+      e.preventDefault();
+      let api = "http://localhost:8000/student/save";
+      let responce = await axios.post(api,val);
+      console.log(responce.data);
+      alert("data is saved...")
+    }
   return (
     <div>
       <h1>Insert Student Data</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={subData}>
         Enter Roll No:<input type="text" name="rollno" onChange={handleInput}/>
         <br/>
         Enter Name:<input type="text" name="name" onChange={handleInput}/>

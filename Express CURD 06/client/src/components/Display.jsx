@@ -3,7 +3,7 @@ import axios from "axios";
 const Display = ()=>{
   const [mydata,setmydata] = useState([]);
   const loadData = async ()=>{
-    let api = "http://localhost:3001/student/display";
+    let api = `${import.meta.env.VITE_BACKEND_URL}/student/display`;
     const responce = await axios.get(api);
     console.log(responce.data);
     setmydata(responce.data);
