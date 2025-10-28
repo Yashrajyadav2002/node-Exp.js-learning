@@ -14,6 +14,17 @@ mongoose.connect(process.env.DBCONNECTION).then(() => console.log("connected to 
 
 const port = process.env.PORT;
 
+app.get("/home",(req,res)=>{
+    let name = true;
+    if(name){
+      res.status(200).send("home page no error");
+    }
+    else{
+        res.status(404).send("home page error occours");
+
+    }
+})
+
 app.listen(port, () => {
     console.log("Server running on port 3001");
 })
