@@ -1,48 +1,50 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-const Display = ()=>{
-  const [mydata,setmydata] = useState([]);
-  const loadData = async ()=>{
-    let api = `${import.meta.env.VITE_BACKEND_URL}/student/display`;
-    const responce = await axios.get(api);
-    console.log(responce.data);
-    setmydata(responce.data);
-  }
 
-  useEffect(()=>{
-  loadData();
-},[]);
+const Display = () => {
+  const [mydata, setmydata] = useState([]);
 
-const ans = mydata.map((key)=>{
-  return(
-    <>
-    <tr>
+  const loadData = async () => {
+    try {
+      const api = "http://localhost:8000/student/display";
+      const response = await axios.get(api);
+      console.log(response.data);
+      setmydata(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const ans = mydata.map((key, index) => (
+    <tr key={index}>
       <td>{key.rollno}</td>
       <td>{key.name}</td>
       <td>{key.city}</td>
       <td>{key.fees}</td>
     </tr>
-    
+  ));
+
+  return (
+    <>
+      <h1 align="center">Display Student Records</h1>
+      <hr />
+      <table border="1" width="600" align="center" bgcolor="lightgray">
+        <thead bgcolor="skyblue">
+          <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Fees</th>
+          </tr>
+        </thead>
+        <tbody>{ans}</tbody>
+      </table>
     </>
-  )
-})
+  );
+};
 
-return(
-  <>
-  <h1>Display Record</h1>
-  <hr />
-
-  <table border="1" width="600" align="center" bgcolor="lightgray">
-    <tr bgcolor="skyblue">
-      <th>Rollno</th>
-      <th>name</th>
-      <th>city</th>
-      <th>fees</th>
-    </tr>
-    {ans}
-  </table>
-  
-  </>
-)
-}
-export default Display
+export default Display;

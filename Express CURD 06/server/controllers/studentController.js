@@ -1,77 +1,98 @@
 const studentModel = require("../models/studentModel");
 
-// const dataSave = async (req,res)=>{
-//     console.log(req.body);
-//     const{rollno,name,city,fees}= req.body;
-//     const Student = await studentModel.create({
-//         rollno:rollno,
-//         name:name,
-//         city:city,
-//         fees:fees
-//     })
-//     console.log(Student);
-//     res.send("Data save Sucessfully",Student)
-// };
-
-
+// ✅ INSERT /student/insert
 const dataSave = async (req, res) => {
   try {
     const { rollno, name, city, fees } = req.body;
     const student = await studentModel.create({ rollno, name, city, fees });
     res.status(201).json({ msg: "Data saved successfully", student });
   } catch (error) {
+    console.error("Error saving data:", error);
     res.status(500).json({ msg: "Error saving data", error });
   }
 };
 
-const dataDisplay=async (req,res)=>{
+// ✅ DISPLAY ALL /student/display
+const dataDisplay = async (req, res) => {
+  try {
     const myData = await studentModel.find();
-    res.send(myData);
-}
+    res.status(200).json(myData);
+  } catch (error) {
+    res.status(500).json({ msg: "Error fetching data", error });
+  }
+};
 
-const datasearch =async(req,res)=>{
-    const {rno}=req.body;
-    const Student =await studentModel.find({rollno:rno});
-    console.log(Student);
-    res.send(Student);
+// ✅ SEARCH /student/search
+const datasearch = async (req, res) => {
+  try {
+    const { rno } = req.body;
+    console.log("Searching for Roll No:", rno);
 
-}
+    const student = await studentModel.findOne({ rollno: rno });
 
-const updateDisplay = async(req,res)=>{
-    const Student = await studentModel.find();
-    res.send(Student);
-}
+    if (!student) {
+      console.log("No record found");
+      return res.status(404).json({ msg: "No record found" });
+    }
 
-const updateDelete = async(req,res)=>{
-    const {id}= req.query;
-    const Student  = await studentModel.findByIdAndDelete(id);
-    res.send({msg:"Data sucessfully Deleted !!"})
-}
+    console.log("Found student:", student);
+    res.status(200).json(student);
+  } catch (error) {
+    console.error("Error while searching:", error);
+    res.status(500).json({ msg: "Server error while searching" });
+  }
+};
 
-const editDisplay = async(req,res)=>{
-    const {id}= req.params;
-    const student  =await studentModel.findById(id);
-    console.log(student);
-    res.send(student);
-}
+// ✅ UPDATE DISPLAY /student/update-display
+const updateDisplay = async (req, res) => {
+  try {
+    const students = await studentModel.find();
+    res.status(200).json(students);
+  } catch (error) {
+    res.status(500).json({ msg: "Error fetching update data", error });
+  }
+};
 
-const editdataSave = async (req,res)=>{
-    const {_id,rollno,name,city,fees} = req.body;
-    const student  =await studentModel.findByIdAndUpdate(_id,{
-        rollno:rollno,
-        name:name,
-        city:city,
-        fees:fees
-    });
-    res.send({msg:"Data succesfully Updated .."})
-}
+// ✅ DELETE /student/delete?id=...
+const updateDelete = async (req, res) => {
+  try {
+    const { id } = req.query;
+    await studentModel.findByIdAndDelete(id);
+    res.status(200).json({ msg: "Data successfully deleted!" });
+  } catch (error) {
+    res.status(500).json({ msg: "Error deleting data", error });
+  }
+};
 
-module.exports={
-    dataDisplay,
-    datasearch ,
-    updateDisplay,
-    updateDelete,
-    editDisplay,
-    editdataSave,
-    dataSave
+// ✅ EDIT DISPLAY /student/edit/:id
+const editDisplay = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const student = await studentModel.findById(id);
+    if (!student) return res.status(404).json({ msg: "No record found" });
+    res.status(200).json(student);
+  } catch (error) {
+    res.status(500).json({ msg: "Error fetching edit data", error });
+  }
+};
+
+// ✅ EDIT SAVE /student/edit
+const editdataSave = async (req, res) => {
+  try {
+    const { _id, rollno, name, city, fees } = req.body;
+    await studentModel.findByIdAndUpdate(_id, { rollno, name, city, fees });
+    res.status(200).json({ msg: "Data successfully updated." });
+  } catch (error) {
+    res.status(500).json({ msg: "Error updating data", error });
+  }
+};
+
+module.exports = {
+  dataSave,
+  dataDisplay,
+  datasearch,
+  updateDisplay,
+  updateDelete,
+  editDisplay,
+  editdataSave,
 };

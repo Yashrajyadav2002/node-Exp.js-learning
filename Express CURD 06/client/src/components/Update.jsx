@@ -6,24 +6,39 @@ const Update = () => {
   const [myData, setMyData] = useState([]);
   const navigate = useNavigate();
 
+  // ✅ Load all student records
   const loadData = async () => {
-    const api = "http://localhost:3001/student/updatedata";
-    const response = await axios.get(api);
-    console.log(response.data);
-    setMyData(response.data);
+    try {
+      const api = "http://localhost:8000/student/update-display"; // ✅ Correct route
+      const response = await axios.get(api);
+      console.log("Loaded data:", response.data);
+      setMyData(response.data);
+    } catch (error) {
+      console.error("Error loading data:", error);
+      alert("Failed to load data. Please check backend connection.");
+    }
   };
 
   useEffect(() => {
     loadData();
   }, []);
 
+  // ✅ Delete a student record
   const myDelete = async (id) => {
-    const api = `http://localhost:3001/student/updatedelete?id=${id}`;
-    const response = await axios.delete(api);
-    alert(response.data.msg);
-    loadData();
+    if (!window.confirm("Are you sure you want to delete this record?")) return;
+
+    try {
+      const api = `http://localhost:8000/student/update-delete?id=${id}`; // ✅ Correct route
+      const response = await axios.delete(api);
+      alert(response.data.msg || "Record deleted successfully");
+      loadData(); // refresh table
+    } catch (error) {
+      console.error("Error deleting record:", error);
+      alert("Failed to delete record. Check console for details.");
+    }
   };
 
+  // ✅ Navigate to Edit Page
   const myEdit = (id) => {
     navigate(`/myedit/${id}`);
   };
@@ -35,29 +50,25 @@ const Update = () => {
       <td>{key.city}</td>
       <td>{key.fees}</td>
       <td>
-        <a href="#" onClick={() => myEdit(key._id)}>
-          Edit
-        </a>{" "}
-        |{" "}
-        <a href="#" onClick={() => myDelete(key._id)}>
-          Delete
-        </a>
+        <button onClick={() => myEdit(key._id)}>Edit</button>
+        &nbsp;|&nbsp;
+        <button onClick={() => myDelete(key._id)}>Delete</button>
       </td>
     </tr>
   ));
 
   return (
     <>
-      <h1>Update Student Data</h1>
+      <h1 align="center">Update Student Data</h1>
       <hr />
-      <table align="center" width="500" border="1">
-        <thead>
+      <table align="center" width="700" border="1" bgcolor="lightgray">
+        <thead bgcolor="skyblue">
           <tr>
-            <th>RollNo</th>
+            <th>Roll No</th>
             <th>Name</th>
             <th>City</th>
             <th>Fees</th>
-            <th>Update</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>{ans}</tbody>
