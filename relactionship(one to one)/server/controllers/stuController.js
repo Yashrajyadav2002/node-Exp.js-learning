@@ -33,7 +33,8 @@ const bookdataSave=async(req,res)=>{
 
     const book = await BookModel.create({
           bookname:bookname ,
-          price:price
+          price:price,
+          authorid:authid
     })
 
     await AuthorModel.findByIdAndUpdate(authid, {$push:{booksid:book._id}})

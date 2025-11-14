@@ -5,9 +5,15 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const bodyparser = require('body-parser')
 const StuRoute = require("./routes/stuRoute");
-mongoose.connect(process.env.DBCONN).then(()=>{
-    console.log("DB connected Succesfully!");
-})
+
+
+mongoose.connect(process.env.DBCONN)
+  .then(() => {
+    console.log("DB successfully connected!");
+  })
+  .catch((err) => {
+    console.error("DB connection failed:", err);
+  });
 // Body-parser middleware
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
@@ -16,7 +22,8 @@ app.use("/students", StuRoute);
 
 
 
-const port  = process.env.PORT || 7000;
+
+const port=  process.env.PORT || 8000;
 app.listen(port, ()=>{
-    console.log(`server run on port ${port}`);
-})
+    console.log(`server run on port ${port}port ` );
+});
