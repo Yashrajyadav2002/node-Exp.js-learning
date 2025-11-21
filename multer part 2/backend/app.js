@@ -15,6 +15,7 @@ app.use(bodyparser.json())
 app.use(cors());
 app.use("/students", StuRoute);
 
+
 // Configure multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

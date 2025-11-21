@@ -23,12 +23,18 @@ const Display = ()=>{
                 <td>
                     <img src={key.defaultImage} style={{width:"100px", height:"80px"}}/>
              <br />
-             {
-              key.images.map((key1)=>{
-                return "<p> <img src="+key1+" width='30' height='40' /> <p>"
-              })
-             }
 
+             <td>
+          { key.images.map((img) => (
+           <img
+              src={img} 
+                    width="100"
+                    height="80"
+               style={{ marginRight: "5px", borderRadius: "5px" }}
+                  />
+          ))}
+        </td>
+            
                 </td>
                 <td>{key.name}</td>
                 <td>{key.email}</td>
@@ -42,14 +48,17 @@ const Display = ()=>{
 
     return(
         <>
-        <h1>Data display</h1>
-        <table>
+        <h1 align="center">Data display</h1>
+        <table border="1" cellPadding="10" align="center"> 
+            <thead>
             <tr>
+                <th>Images</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Subject</th>
             </tr>
-            {ans}
+            </thead>
+            <thead>{ans}</thead>
         </table>
         
         </>
